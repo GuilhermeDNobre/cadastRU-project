@@ -1,0 +1,24 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "commonjs",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GuilhermeDNobre/cadastRU.git"
+  },
+  "author": "Guilherme Damasceno",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/GuilhermeDNobre/cadastRU/issues"
+  },
+  "homepage": "https://github.com/GuilhermeDNobre/cadastRU#readme",
+  "description": "",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "puppeteer": "^23.4.1"
+  }
+}
