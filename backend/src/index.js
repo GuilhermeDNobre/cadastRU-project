@@ -7,6 +7,10 @@ dotenv.config({path: '../.env'});
 const username = process.env.NODE_ENV_NAME
 const password = process.env.NODE_ENV_PASSWORD
 
+async function localizaContinuar(page) {
+    const element = await page.$('[type="submit"]');
+    element.click()
+}
 
 
 async function initialize() {
@@ -39,7 +43,20 @@ async function initialize() {
 
     await page.waitForNavigation()
 
+    // localizaContinuar(page)
+
+    // await page.waitForNavigation()
+
+    await page.locator('div ::-p-text(Portal do Discente)').click()
     
+    await page.waitForNavigation()
+
+    await page.locator('td ::-p-text(Restaurante Universitário)').hover()
+
+    await page.locator('td ::-p-text(Agendar Refeição)').click()
+
+    await page.waitForNavigation()
+    await page.waitForNavigation()
 
     
     await browser.close();
