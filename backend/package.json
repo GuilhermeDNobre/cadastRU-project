@@ -18,6 +18,7 @@
   "homepage": "https://github.com/GuilhermeDNobre/cadastRU#readme",
   "description": "",
   "dependencies": {
+    "date-fns": "^4.1.0",
     "dotenv": "^16.4.5",
     "puppeteer": "^23.4.1"
   }
