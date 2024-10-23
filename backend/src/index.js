@@ -13,13 +13,16 @@ function setSunday(today) {
     if(datefns.isSunday(today)){
         sunday = today
         return setWeekDays()
-    }else if(datefns.isSaturday){
+    }else if(datefns.isSaturday(today)){
         sunday = datefns.addDays(today, 1)
         return setWeekDays()
-    }else if(datefns.isFriday){
+    }else if(datefns.isFriday(today)){
         sunday = datefns.addDays(today, 2)
         return setWeekDays()
-    }else console.log('Dia Inválido')
+    }else if(datefns.isThursday(today)){
+        sunday = datefns.addDays(today, 3)
+        return setWeekDays()
+    }else throw new Error("Dia inválido, não é possível agendar a próxima semana inteira a partir de hoje.");
 }
 
 function setWeekDays() {
@@ -77,9 +80,9 @@ async function initialize() {
 
     await page.waitForNavigation()
 
-    // localizaSubmit(page)
+    localizaSubmit(page)
 
-    // await page.waitForNavigation()
+    await page.waitForNavigation()
 
     await page.locator('div ::-p-text(Portal do Discente)').click()
     
@@ -91,35 +94,54 @@ async function initialize() {
 
     await page.waitForNavigation()
 
-    localizaDataAgendamento(page)
+    for(let i = 0; i <= week.length; i++){
+        localizaDataAgendamento(page)
 
-    await page.keyboard.type(
-        '0', {
-        delay: 20
-    })
-    
-    await page.keyboard.type(
-        week[0], {
-        delay: 50
-    })
+        await page.keyboard.type(
+            '0', {
+            delay: 20
+        })
+        
+        await page.keyboard.type(
+            week[i], {
+            delay: 50
+        })
 
-    await page.select('select[id="formulario:tipo_refeicao"]', '2')
-    await page.click('select[id="formulario:horario_agendado"]')
-    await page.select('select[id="formulario:horario_agendado"]', '53')
+        await page.select('select[id="formulario:tipo_refeicao"]', '2')
+        
+        await setTimeout(() => {
+            page.select('select[id="formulario:horario_agendado"]', '53')
+            setTimeout(() => {
+                page.click("input[type=submit]");
+            }, "1000")
+        }, "2000");
 
-    
-    
-    
-    // await page.keyboard.press('Tab')
-    // await page.keyboard.press('ArrowDown')
-    // await page.click('option[value="2"]')
-    // await page.keyboard.press('ArrowDown')
-    // await page.keyboard.press('Enter')
-    // await page.keyboard.press('Tab')
-    // await page.keyboard.press('Enter')
+        await page.waitForNavigation();
+        
+        await localizaDataAgendamento(page)
 
-    
-    await page.waitForNavigation()
+        await page.keyboard.type(
+            '0', {
+            delay: 20
+        })
+        
+        await page.keyboard.type(
+            week[i], {
+            delay: 50
+        })
+
+        await page.select('select[id="formulario:tipo_refeicao"]', '3')
+        
+        await setTimeout(() => {
+            page.select('select[id="formulario:horario_agendado"]', '54')
+            setTimeout(() => {
+                page.click("input[type=submit]");
+            }, "1000")
+        }, "2000");
+
+        await page.waitForNavigation();
+    }
+
     await page.waitForNavigation()
     
     await browser.close();
