@@ -127,7 +127,7 @@ async function initialize() {
         
         await page.keyboard.type(
             week[i], {
-            delay: 50
+            delay: 100
         })
 
         await page.select('select[id="formulario:tipo_refeicao"]', '3')
@@ -141,8 +141,6 @@ async function initialize() {
 
         await page.waitForNavigation();
     }
-
-    await page.waitForNavigation()
     
     await browser.close();
 }
